@@ -11,7 +11,7 @@ class Manager:
     def createEngine(self):
         #engine = create_engine('sqlite:///message.db?check_same_thread=False', echo=False)
         #engine = create_engine('postgresql://postgres:postgres@localhost/chatdb' )
-        engine = create_engine('postgres://aoytkblbpsqoaw:18452ab6923dccefc3e50b26db3a020f7b837c873a793c0e06bc5b7ef1a97081@ec2-174-129-253-162.compute-1.amazonaws.com:5432/df0fv72p3is861' )
+        engine = create_engine('postgres://wzluksutgwskdb:f7e5ca57dc3c6658da8fcebe3b66acd5d00ddeb92cc11b1ca70acd780bf60d8c@ec2-54-197-238-238.compute-1.amazonaws.com:5432/df9ihc326h07d4',echo=False)
         self.Base.metadata.create_all(engine)
         return engine
 
