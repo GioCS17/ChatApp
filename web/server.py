@@ -414,5 +414,5 @@ def mostrarChat():
 if __name__ == '__main__':
     app.secret_key = ".."
     #app.run(debug=True,port=8080, threaded=True, host=('127.0.0.1'))
-    #app.run(debug=True,threaded=True)
-    socketio.run(app,debug=True,port=8000)
+    app.run(debug=True,threaded=True,port=80,use_reloader=True)
+    #socketio.run(app,debug=True,port=8000)
