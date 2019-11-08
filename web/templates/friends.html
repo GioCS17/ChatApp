@@ -1,0 +1,133 @@
+{% extends 'main.html'%}
+{% block content%}
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="../static/css/friends.css">
+
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+
+<div id="frame">
+	<div id="sidepanel">
+		<div id="search">
+			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+			<input type="text" placeholder="Search contacts..." />
+		</div>
+		<div id="contacts">
+			<ul>
+                {% for cont in contacts%}
+				<li class="contact" id="contact" onclick="getContact('{{cont[0].id}}','{{cont[0].name}}')">
+					<div class="wrap">
+						<span class="contact-status online"></span>
+						<img class="rounded-circle mx-auto d-block img-fluid" src="data:cont[1];base64,{{cont[1]}}" alt="{{cont[0].name}}" />
+						<div class="meta">
+							<p class="name">{{cont[0].name}}</p>
+							<!--
+							<p class="preview">You just got LITT up, Mike.</p>
+							-->
+						</div>
+					</div>
+                </li>
+                {% endfor %}
+
+                <!--
+				<li class="contact active">
+					<div class="wrap">
+						<span class="contact-status busy"></span>
+						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<div class="meta">
+							<p class="name">Harvey Specter</p>
+							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status away"></span>
+						<img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+						<div class="meta">
+							<p class="name">Rachel Zane</p>
+							<p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status"></span>
+						<img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
+						<div class="meta">
+							<p class="name">Harold Gunderson</p>
+							<p class="preview">Thanks Mike! :)</p>
+						</div>
+					</div>
+				</li>
+                -->
+			</ul>
+		</div>
+		<div id="bottom-bar">
+            <button id="addcontact" data-toggle="modal" data-target="#addC"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+            <!--
+			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+            -->
+		</div>
+    </div>
+
+	<div class="content">
+		<div class="contact-profile">
+		<!--
+			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+		-->
+			<p id="nameContact"></p>
+			<div class="social-media">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+				 <i class="fa fa-instagram" aria-hidden="true"></i>
+			</div>
+        </div>
+
+        <!--Aqui se agregan los messages-->
+		<div class="messages">
+			{% include 'chat.html'%}
+        </div>
+
+		<div class="message-input">
+			<div class="wrap">
+			<input type="text" id="text_message" placeholder="Write your message..." />
+			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+			<button class="submit" id="send_message"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Add Contact -->
+<div class="modal fade" id="addC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST"  action="/addContact" >
+            <div class="form-group">
+                <label for="usernameUser">Username</label>
+                <input type="text" name="username" class="form-control" id="usernameUser" placeholder="Contact Username">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{url_for('static',filename='js/friends.js')}}" ></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+
+{% endblock %}

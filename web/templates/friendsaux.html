@@ -1,0 +1,90 @@
+{%extends 'main.html'%}
+{%block content%}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<div class="container">
+    <!-- contacts card -->
+    <div class="card card-default" id="card_contacts">
+        <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" >
+            <ul class="list-group pull-down" id="contact-list">
+                    <span  class="list-group-item list-group-item-action active">
+                        Contacts 
+                        <button type="button" class="btn btn-light float-right" data-toggle="modal" data-target="#addC">
+                            + Add Contact
+                        </button>
+                    </span>
+                {% for cont in contacts%}
+                <li class="list-group-item">
+                    <div class="row w-100">
+                        <div class="col-12 col-sm-6 col-md-3 px-0">
+							<img class="rounded-circle mx-auto d-block img-fluid" src="data:cont[1];base64,{{cont[1]}}" alt="{{cont[0].name}}" />
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
+                            <span class="fa fa-mobile fa-2x text-success float-right pulse" title="online now"></span>
+                            <label class="name lead">{{cont[0].fullname}}</label>
+                            <br> 
+                            <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5842 Hillcrest Rd"></span>
+                            <span class="text-muted">5842 Hillcrest Rd</span>
+                            <br>
+                            <span class="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="(870) 288-4149"></span>
+                            <span class="text-muted small">(870) 288-4149</span>
+                            <br>
+                            <span class="fa fa-comment fa-fw text-muted" data-toggle="tooltip" data-original-title="" title=""></span>
+                            <span class="text-muted small text-truncate">mike.ana@example.com</span>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+
+                <li class="list-group-item">
+                    <div class="row w-100">
+                        <div class="col-12 col-sm-6 col-md-3 px-0">
+                            <img src="http://demos.themes.guide/bodeo/assets/images/users/w102.jpg" alt="Rosemary Porter" class="img-fluid rounded-circle d-block mx-auto">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-9 text-center text-sm-left">
+                            <span class="fa fa-envelope fa-lg text-danger float-right" title="left you a message"></span>
+                            <span class="name lead">Rosemary Porter</span>
+                            <br> <span class="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5267 Cackson St"></span>
+                            <span class="text-muted">5267 Cackson St</span>
+                            <br>
+                            <span class="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="(497) 160-9776"></span>
+                            <span class="text-muted small">(497) 160-9776</span>
+                            <br>
+                            <span class="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="rosemary.porter@example.com"></span>
+                            <span class="text-muted small text-truncate">rosemary.porter@example.com</span>
+                            <br>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>    
+
+<!--Add Contact -->
+<div class="modal fade" id="addC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST"  action="/addContact" >
+            <div class="form-group">
+                <label for="usernameUser">Username</label>
+                <input type="text" name="username" class="form-control" id="usernameUser" placeholder="Contact Username">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
